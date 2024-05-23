@@ -1,4 +1,4 @@
-import { Box, Container, Flex, Heading, Text, VStack, Image, Button, HStack } from "@chakra-ui/react";
+import { Box, Container, Flex, Heading, Text, VStack, Image, Button, HStack, Circle } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
@@ -78,10 +78,22 @@ const Index = () => {
         <Heading size="md" mb={4}>Filter by Color</Heading>
         <HStack spacing={4}>
           <Button onClick={() => handleColorChange("")}>All</Button>
-          <Button onClick={() => handleColorChange("red")}>Red</Button>
-          <Button onClick={() => handleColorChange("white")}>White</Button>
-          <Button onClick={() => handleColorChange("purple")}>Purple</Button>
-          <Button onClick={() => handleColorChange("yellow")}>Yellow</Button>
+          <Button onClick={() => handleColorChange("red")}>
+            <Circle size="20px" bg="red.500" mr={2} />
+            Red
+          </Button>
+          <Button onClick={() => handleColorChange("white")}>
+            <Circle size="20px" bg="gray.200" mr={2} />
+            White
+          </Button>
+          <Button onClick={() => handleColorChange("purple")}>
+            <Circle size="20px" bg="purple.500" mr={2} />
+            Purple
+          </Button>
+          <Button onClick={() => handleColorChange("yellow")}>
+            <Circle size="20px" bg="yellow.400" mr={2} />
+            Yellow
+          </Button>
         </HStack>
       </Box>
 
