@@ -48,6 +48,30 @@ const bouquets = [
     image: "/images/daisy-dream.jpg",
     color: "yellow",
   },
+  {
+    id: 7,
+    name: "Red Roses",
+    description: "A classic bouquet of stunning red roses.",
+    price: "$32.99",
+    image: "/images/red-roses.jpg",
+    color: "red",
+  },
+  {
+    id: 8,
+    name: "Red Tulips",
+    description: "A vibrant bouquet of red tulips.",
+    price: "$27.99",
+    image: "/images/red-tulips.jpg",
+    color: "red",
+  },
+  {
+    id: 9,
+    name: "Red Lilies",
+    description: "An elegant bouquet of red lilies.",
+    price: "$37.99",
+    image: "/images/red-lilies.jpg",
+    color: "red",
+  },
 ];
 
 const Index = () => {
