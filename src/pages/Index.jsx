@@ -1,4 +1,4 @@
-import { Box, Container, Flex, Heading, Text, VStack, Image, Button, HStack, Circle } from "@chakra-ui/react";
+import { Box, Container, Flex, Heading, Text, VStack, Image, Button, HStack, Circle, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
@@ -76,9 +76,21 @@ const bouquets = [
 
 const Index = () => {
   const [selectedColor, setSelectedColor] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedBouquet, setSelectedBouquet] = useState(null);
 
   const handleColorChange = (color) => {
     setSelectedColor(color);
+  };
+
+  const handleSubscribeClick = (bouquet) => {
+    setSelectedBouquet(bouquet);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedBouquet(null);
   };
 
   return (
@@ -133,7 +145,7 @@ const Index = () => {
                   <Heading size="md">{bouquet.name}</Heading>
                   <Text mt={4}>{bouquet.description}</Text>
                   <Text fontWeight="bold" mt={4}>{bouquet.price}</Text>
-                  <Button colorScheme="teal" mt={4}>Subscribe</Button>
+                  <Button colorScheme="teal" mt={4} onClick={() => handleSubscribeClick(bouquet)}>Subscribe</Button>
                 </Box>
               </Box>
             ))}
@@ -141,6 +153,21 @@ const Index = () => {
       </Box>
 
       <Footer />
+
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Subscribe to {selectedBouquet?.name}</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Text>Are you sure you want to subscribe to the {selectedBouquet?.name} bouquet for {selectedBouquet?.price} per month?</Text>
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={handleCloseModal}>Close</Button>
+            <Button variant="ghost">Subscribe</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </Container>
   );
 };
