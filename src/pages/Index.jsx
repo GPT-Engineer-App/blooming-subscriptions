@@ -139,8 +139,18 @@ const Index = () => {
             ))}
         </Flex>
       </Box>
+
+      <Footer />
     </Container>
   );
 };
+
+const Footer = () => (
+  <Box as="footer" bg="gray.100" p={4} mt={10}>
+    <Text textAlign="center" fontSize="sm">
+      Opening Hours: Monday - Saturday, 13:00 - 18:00
+    </Text>
+  </Box>
+);
 
 export default Index;
