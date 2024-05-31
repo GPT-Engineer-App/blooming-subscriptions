@@ -1,4 +1,4 @@
-import { Box, Container, Flex, Heading, Text, VStack, Image, Button, HStack, Circle } from "@chakra-ui/react";
+import { Box, Container, Flex, Heading, Text, VStack, Image, Button, HStack, Circle, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
@@ -76,9 +76,27 @@ const bouquets = [
 
 const Index = () => {
   const [selectedColor, setSelectedColor] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedBouquet, setSelectedBouquet] = useState(null);
 
   const handleColorChange = (color) => {
     setSelectedColor(color);
+  };
+
+  const openModal = (bouquet) => {
+    setSelectedBouquet(bouquet);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedBouquet(null);
+  };
+
+  const handleSubscription = () => {
+    // Logic to handle subscription (e.g., API call)
+    console.log(`Subscribed to ${selectedBouquet.name}`);
+    closeModal();
   };
 
   return (
@@ -133,7 +151,7 @@ const Index = () => {
                   <Heading size="md">{bouquet.name}</Heading>
                   <Text mt={4}>{bouquet.description}</Text>
                   <Text fontWeight="bold" mt={4}>{bouquet.price}</Text>
-                  <Button colorScheme="teal" mt={4}>Subscribe</Button>
+                  <Button colorScheme="teal" mt={4} onClick={() => openModal(bouquet)}>Subscribe</Button>
                 </Box>
               </Box>
             ))}
@@ -141,6 +159,19 @@ const Index = () => {
       </Box>
 
       <Footer />
+
+      <Modal isOpen={isModalOpen} onClose={closeModal}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Subscribe to {selectedBouquet?.name}</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Text>Price: {selectedBouquet?.price}</Text>
+            <Text>Description: {selectedBouquet?.description}</Text>
+            <Button colorScheme="teal" mt={4} onClick={handleSubscription}>Confirm Subscription</Button>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </Container>
   );
 };
